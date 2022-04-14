@@ -3,6 +3,7 @@ const display = document.querySelector(".display");
 const buttons = document.querySelectorAll(".btn-num");
 const operators = document.querySelectorAll(".operator-buttons button");
 const enterButton = document.querySelector(".btn-enter");
+const clearButton = document.querySelector(".btn-clear");
 
 let displayValue = "";
 let num1 = null;
@@ -13,22 +14,22 @@ buttons.forEach((button) => {
   button.addEventListener("click", () => {
     let buttonContent = button.textContent;
     displayValue += buttonContent.toString();
-    console.log(displayValue);
+    display.textContent = displayValue;
   });
 });
 
 operators.forEach((button) => {
-  // save num1 input
-  // clear display
-  // save operator value
-  // start listening for num2 inputs
-  // if num1 has been declared, just change the operator
   button.addEventListener("click", () => {
     if (!num1) {
+      if (displayValue == "" || displayValue == "NaN") {
+        display.textContent = "Please select a number first";
+        return;
+      }
       num1 = displayValue;
       displayValue = "";
     }
     operator = button.textContent;
+    display.textContent = operator;
     console.log(operator);
   });
 });
@@ -36,8 +37,19 @@ operators.forEach((button) => {
 enterButton.addEventListener("click", () => {
   num2 = displayValue;
   console.log(`${num1}${operator}${num2}`);
-  operate(operator, num1, num2);
+  display.textContent = operate(operator, num1, num2);
+  num1 = parseInt(display.textContent);
+  console.log(num1);
 });
+
+clearButton.addEventListener("click", () => clearDisplay());
+
+function clearDisplay() {
+  display.textContent = displayValue;
+  displayValue = "";
+  num1 = null;
+  num2 = null;
+}
 
 const add = (a, b) => a + b;
 const subtract = (a, b) => a - b;
@@ -49,23 +61,23 @@ function operate(operator, a, b) {
   b = parseInt(b);
   switch (operator) {
     case "+":
-      console.log(add(a, b));
-      break;
+      clearDisplay();
+      return add(a, b);
     case "-":
-      console.log(subtract(a, b));
-      break;
+      clearDisplay();
+      return subtract(a, b);
     case "*":
-      console.log(multiply(a, b));
-      break;
+      clearDisplay();
+      return multiply(a, b);
     case "/":
-      a == 0 || b == 0
-        ? console.log("Cannot divide by 0")
-        : console.log(divide(a, b));
-      break;
+      clearDisplay();
+      if (a == 0 || b == 0) {
+        clearDisplay();
+        return "Cannot divide by 0";
+      } else {
+        return divide(a, b);
+      }
     default:
       break;
   }
-  displayValue = "";
-  num1 = null;
-  num2 = null;
 }

@@ -35,14 +35,20 @@ operators.forEach((button) => {
 });
 
 enterButton.addEventListener("click", () => {
+  if (!num1 || !displayValue || !operator) {
+    display.textContent = "Please select at least 2 numbers and an operator";
+    return;
+  }
   num2 = displayValue;
   console.log(`${num1}${operator}${num2}`);
   display.textContent = operate(operator, num1, num2);
   num1 = parseInt(display.textContent);
-  console.log(num1);
 });
 
-clearButton.addEventListener("click", () => clearDisplay());
+clearButton.addEventListener("click", () => {
+  clearDisplay();
+  display.textContent = "_";
+});
 
 function clearDisplay() {
   display.textContent = displayValue;

@@ -2,3 +2,57 @@
     margin: 0;
     padding: 0;
 }
+.calculator{
+    width: 20%;
+    margin: 10% auto;
+    background: skyblue;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+}
+.display{
+    background: #000;
+    width: 100%;
+    padding: 15px;
+    box-sizing: border-box;
+    color: white;
+    font-size: 30px;
+    text-align: end;
+}
+.buttons-container{
+    display: flex;
+    width: 100%;
+}
+.operator-buttons{
+    display: flex;
+    width: 20%;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+}
+.num-buttons{
+    display: flex;
+    flex-wrap: wrap;
+    width: 80%;
+}
+.last-row-buttons{
+    display: flex;
+    width: 100%;
+}
+.operator-buttons button{
+    border: none;
+    font-size: 30px;
+    background: transparent;
+    height: 120px;
+    width: 100%;
+}
+.num-buttons button{
+    width: 33.3%;
+    border: none;
+    font-size: 30px;
+    background: transparent;
+}
+.num-buttons button:hover, .operator-buttons button:hover{
+    background: rgb(187, 229, 246);
+}
